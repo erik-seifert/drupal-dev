@@ -89,6 +89,7 @@ RUN source ~/.nvm/nvm.sh; \
 RUN echo %sudo	ALL=NOPASSWD: ALL >> /etc/sudoers
 
 VOLUME /var/www/html
+VOLUME /var/lib/mysql
 
 RUN echo 'root:root' | chpasswd
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
