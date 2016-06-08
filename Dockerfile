@@ -8,6 +8,7 @@ ENV NVM_VERSION v0.31.0
 ENV NODE_VERSION v6.2.0
 ENV PHPREDIS_VERSION 3.0.0-rc1
 ENV DEBIAN_FRONTEND noninteractive
+ENV NVM_DIR /usr/local/nvm
 
 ENV NODE_PATH ~/$NODE_VERSION/lib/node_modules
 ENV PATH      ~/$NODE_VERSION/bin:$PATH
@@ -49,6 +50,8 @@ RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$P
 
 RUN apt-get clean
 
+RUN a2enmod rewrite
+
 # get from https://github.com/docker-library/drupal/blob/master/8.1/apache/Dockerfile
 # see https://secure.php.net/manual/en/opcache.installation.php
 RUN { \
@@ -82,9 +85,14 @@ RUN echo -e '<?php phpinfo(); ?>' >> /var/www/html/info.php
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash
 
 # Install NODE
-RUN source ~/.nvm/nvm.sh; \
-    nvm install $NODE_VERSION; \
-    nvm use --delete-prefix $NODE_VERSION;
+RUN curl https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash \
+    && source $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 RUN echo %sudo	ALL=NOPASSWD: ALL >> /etc/sudoers
 
