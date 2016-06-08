@@ -109,7 +109,10 @@ RUN echo -e '[program:apache2]\ncommand=/bin/bash -c "source /etc/apache2/envvar
 RUN echo -e '[program:mysql]\ncommand=/usr/bin/pidproxy /var/run/mysqld/mysqld.pid /usr/sbin/mysqld\nautorestart=true\n\n' >> /etc/supervisor/supervisord.conf
 RUN echo -e '[program:sshd]\ncommand=/usr/sbin/sshd -D\n\n' >> /etc/supervisor/supervisord.conf
 RUN echo -e '[program:sshd]\ncommand=/usr/sbin/sshd -D\n\n' >> /etc/supervisor/supervisord.conf
-# RUN echo -e '[program:redis]\ncommand=/usr/sbin/redis-server\n\n' >> /etc/supervisor/supervisord.conf
+RUN echo -e '[program:redis]\ncommand=/usr/bin/redis-server\n\n' >> /etc/supervisor/supervisord.conf
+
+RUN which redis-server
+RUN /bin/bash --login -c "npm i -g bower gulp-cli forever"
 
 EXPOSE 80 3306 22
 CMD exec supervisord -n
