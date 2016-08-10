@@ -1,4 +1,4 @@
-FROM bconnect/drupal-dev-base 
+FROM php:7.0.7-apache
 
 ENV MYSQL_HOST mysql
 ENV MYSQL_LOGIN drupal
