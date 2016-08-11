@@ -6,16 +6,13 @@ RUN apt-get update && apt-get install -y \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
         curl \
-        redis-server \
         libz-dev \
         libpq-dev \
         graphviz \
         supervisor \
         libpng12-dev \
-        apt-utils \
         libbz2-dev \
         wget \
-        vim-tiny \
     && docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-install -j$(nproc) mcrypt \
     && docker-php-ext-install -j$(nproc) pdo_mysql \
@@ -76,9 +73,13 @@ RUN wget http://static.pdepend.org/php/latest/pdepend.phar && \
 	  chmod +x pdepend.phar && \
 	  mv pdepend.phar /usr/bin/phpmd
 
+RUN wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar && \
+	  chmod +x phpcs.phar && \
+	  mv phpcs.phar /usr/bin/phpcs
+
 RUN wget http://static.phpmd.org/php/latest/phpmd.phar && \
 	  chmod +x phpmd.phar && \
-	  mv phpmd.phar /usr/bin/phpcs
+	  mv phpmd.phar /usr/bin/phpmd
 
 RUN wget https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar && \
 	  chmod +x phpcbf.phar && \
