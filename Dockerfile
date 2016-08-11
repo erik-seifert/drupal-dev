@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install bcmath opcache
 
+# Install xdebug
 RUN yes | pecl install xdebug \
     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
@@ -56,11 +57,11 @@ RUN drush init -y
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/bin/composer
 
-# Install NODE
-
+# Create drone and result storage
 RUN mkdir /drone
 RUN mkdir /results
 
+# Install all CS and Test Tools
 RUN cd /drone && \
 	wget https://phar.phpunit.de/phploc.phar && \
     chmod +x phploc.phar && \
@@ -88,14 +89,24 @@ RUN cd /drone && \
 	mv phpmetrics.phar /usr/bin/phpmetrics && \
 	wget http://get.sensiolabs.org/php-cs-fixer.phar && \
 	chmod +x php-cs-fixer.phar && \
-	mv php-cs-fixer.phar /usr/bin/php-cs-fixer
+	mv php-cs-fixer.phar /usr/bin/php-cs-fixer && \
+  wget http://codeception.com/codecept.phar && \
+	chmod +x codecept.phar && \
+	mv codecept.phar /usr/bin/codecept
 
-  RUN composer global require drupal/coder:dev-8.x-2.x
-  RUN phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
+# Download Drupal CS Standards
+RUN composer global require drupal/coder:dev-8.x-2.x
 
+# Add Drupal CS Standard to Code Sniffer
+RUN phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
+
+# Add helper script for running all cs tests
 ADD docker-config/checkstyle.sh /usr/bin/checkstyle.sh
 RUN chmod +x /usr/bin/checkstyle.sh
 
+# Expose volumes
 VOLUME /drone
 VOLUME /results
+
+# Expose Drone Dir
 ENV DRONE_DIR /drone
