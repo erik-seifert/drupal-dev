@@ -111,6 +111,14 @@ RUN composer global require drupal/coder:dev-8.x-2.x
 # Add Drupal CS Standard to Code Sniffer
 RUN phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
 
+# Set some configs
+RUN phpcs --config-set show_warnings 0
+RUN phpcs --config-set show_progress 1
+RUN phpcs --config-set colors 1
+RUN phpcs --config-set encoding utf-8
+RUN phpcs --config-set ignore_errors_on_exit 1
+RUN phpcs --config-set ignore_warnings_on_exit 1
+
 # Add helper script for running all cs tests
 ADD docker-config/checkstyle.sh /usr/bin/checkstyle.sh
 RUN chmod +x /usr/bin/checkstyle.sh
