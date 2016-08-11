@@ -93,8 +93,8 @@ RUN cd /drone && \
   RUN composer global require drupal/coder:dev-8.x-2.x
   RUN phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
 
-ADD docker-config/checkstyle.sh /root/checkstyle.sh
-RUN chmod +x /root/checkstyle.sh
+ADD docker-config/checkstyle.sh /usr/bin/checkstyle.sh
+RUN chmod +x /usr/bin/checkstyle.sh
 
 VOLUME /drone
 VOLUME /results
