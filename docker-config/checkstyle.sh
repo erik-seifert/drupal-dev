@@ -15,3 +15,5 @@ pdepend --summary-xml=/results/pdepend/result.html ${DRONE_DIR}
 phploc --version
 mkdir /results/phploc
 phploc --log-csv /results/phploc/log.csv --progress --git-repository . ${DRONE_DIR}
+
+exit
