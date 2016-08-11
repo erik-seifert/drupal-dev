@@ -68,7 +68,7 @@ RUN cd /drone && \
     wget http://static.pdepend.org/php/latest/pdepend.phar && \
 	chmod +x pdepend.phar && \
 	mv pdepend.phar /usr/bin/pdepend && \
-    wget http://static.phpmd.org/php/latest/phpmd.phar && \
+    wget http://static.pdepend.org/php/latest/pdepend.phar && \
 	chmod +x phpmd.phar && \
 	mv phpmd.phar /usr/bin/phpmd && \
     wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar && \
