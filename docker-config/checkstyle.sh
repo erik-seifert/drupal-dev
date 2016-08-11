@@ -16,4 +16,7 @@ phploc --version
 mkdir /results/phploc
 phploc --log-csv /results/phploc/log.csv --progress --git-repository . ${DRONE_DIR}
 
+tar -zcvf results.tar.gz /results
+mv results.tar.gz /results
+
 exit
