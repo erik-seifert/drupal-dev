@@ -99,4 +99,3 @@ RUN chmod +x /usr/bin/checkstyle.sh
 VOLUME /drone
 VOLUME /results
 ENV DRONE_DIR /drone
-CMD ["/root/checkstyle.sh"]
