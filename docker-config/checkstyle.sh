@@ -6,15 +6,15 @@ phpcs --standard=Drupal --report=xml --report-file=/results/phpcs/result.xml --e
 
 phpmetrics --version
 mkdir /results/phpmetrics
-phpmetrics --report-html=/results/phpmetrics/result.html ${DRONE_DIR}
+phpmetrics --report-html=/results/phpmetrics/result.html ${DRONE_DIR}/${SRC_DIR}
 
 pdepend --version
 mkdir /results/pdepend
-pdepend --summary-xml=/results/pdepend/result.html ${DRONE_DIR}
+pdepend --summary-xml=/results/pdepend/result.html ${DRONE_DIR}/${SRC_DIR}
 
 phploc --version
 mkdir /results/phploc
-phploc --log-csv /results/phploc/log.csv --progress --git-repository . ${DRONE_DIR}
+phploc --log-csv /results/phploc/log.csv --progress --git-repository . ${DRONE_DIR}/${SRC_DIR}
 
 tar -zcvf results.tar.gz /results
 mv results.tar.gz /results

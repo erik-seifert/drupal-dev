@@ -129,3 +129,4 @@ VOLUME /results
 
 # Expose Drone Dir
 ENV DRONE_DIR /drone
+ENV SRC_DIR drupal
