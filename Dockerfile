@@ -62,37 +62,45 @@ RUN mkdir /drone
 RUN mkdir /results
 
 # Install all CS and Test Tools
-RUN cd /drone && \
-	wget https://phar.phpunit.de/phploc.phar && \
+RUN wget https://phar.phpunit.de/phploc.phar && \
     chmod +x phploc.phar && \
-    mv phploc.phar /usr/bin/phploc && \
-    wget http://static.pdepend.org/php/latest/pdepend.phar && \
-	chmod +x pdepend.phar && \
-	mv pdepend.phar /usr/bin/pdepend && \
-    wget http://static.pdepend.org/php/latest/pdepend.phar && \
-	chmod +x phpmd.phar && \
-	mv phpmd.phar /usr/bin/phpmd && \
-    wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar && \
-	chmod +x phpcs.phar && \
-	mv phpcs.phar /usr/bin/phpcs && \
-    wget https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar && \
-	chmod +x phpcbf.phar && \
-	mv phpcbf.phar /usr/bin/phpcbf && \
-    wget https://phar.phpunit.de/phpcpd.phar && \
-	chmod +x phpcpd.phar && \
-	mv phpcpd.phar /usr/bin/phpcpd && \
-    wget https://phar.phpunit.de/phpdcd.phar && \
-	chmod +x phpdcd.phar && \
-	mv phpdcd.phar /usr/bin/phpdcd && \
-	wget https://github.com/Halleck45/PhpMetrics/raw/master/build/phpmetrics.phar && \
-	chmod +x phpmetrics.phar && \
-	mv phpmetrics.phar /usr/bin/phpmetrics && \
-	wget http://get.sensiolabs.org/php-cs-fixer.phar && \
-	chmod +x php-cs-fixer.phar && \
-	mv php-cs-fixer.phar /usr/bin/php-cs-fixer && \
-  wget http://codeception.com/codecept.phar && \
-	chmod +x codecept.phar && \
-	mv codecept.phar /usr/bin/codecept
+    mv phploc.phar /usr/bin/phploc
+
+RUN wget http://static.pdepend.org/php/latest/pdepend.phar && \
+	  chmod +x pdepend.phar && \
+	  mv pdepend.phar /usr/bin/pdepend
+
+RUN wget http://static.pdepend.org/php/latest/pdepend.phar && \
+	  chmod +x pdepend.phar && \
+	  mv pdepend.phar /usr/bin/phpmd
+
+RUN wget http://static.phpmd.org/php/latest/phpmd.phar && \
+	  chmod +x phpmd.phar && \
+	  mv phpmd.phar /usr/bin/phpcs
+
+RUN wget https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar && \
+	  chmod +x phpcbf.phar && \
+	  mv phpcbf.phar /usr/bin/phpcbf
+
+RUN wget https://phar.phpunit.de/phpcpd.phar && \
+	  chmod +x phpcpd.phar && \
+	  mv phpcpd.phar /usr/bin/phpcpd
+
+RUN wget https://phar.phpunit.de/phpdcd.phar && \
+	  chmod +x phpdcd.phar && \
+	  mv phpdcd.phar /usr/bin/phpdcd
+
+RUN wget https://github.com/Halleck45/PhpMetrics/raw/master/build/phpmetrics.phar && \
+	  chmod +x phpmetrics.phar && \
+	  mv phpmetrics.phar /usr/bin/phpmetrics
+
+RUN wget http://get.sensiolabs.org/php-cs-fixer.phar && \
+	  chmod +x php-cs-fixer.phar && \
+	  mv php-cs-fixer.phar /usr/bin/php-cs-fixer
+
+RUN wget http://codeception.com/codecept.phar && \
+	  chmod +x codecept.phar && \
+	  mv codecept.phar /usr/bin/codecept
 
 # Download Drupal CS Standards
 RUN composer global require drupal/coder:dev-8.x-2.x
