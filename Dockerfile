@@ -59,6 +59,7 @@ RUN mv composer.phar /usr/bin/composer
 # Install NODE
 
 RUN mkdir /drone
+RUN mkdir /results
 
 RUN cd /drone && \
 	wget https://phar.phpunit.de/phploc.phar && \
@@ -92,5 +93,10 @@ RUN cd /drone && \
   RUN composer global require drupal/coder:dev-8.x-2.x
   RUN phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
 
+ADD docker-config/checkstyle.sh /root/checkstyle.sh
+RUN chmod +x /root/checkstyle.sh
 
 VOLUME /drone
+VOLUME /results
+ENV DRONE_DIR /drone
+CMD ["/root/checkstyle.sh"]
