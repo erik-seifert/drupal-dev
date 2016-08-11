@@ -89,4 +89,8 @@ RUN cd /drone && \
 	chmod +x php-cs-fixer.phar && \
 	mv php-cs-fixer.phar /usr/bin/php-cs-fixer
 
+  RUN composer global require drupal/coder:dev-8.x-2.x
+  RUN phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
+
+
 VOLUME /drone
