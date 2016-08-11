@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
         libz-dev \
         libpq-dev \
         graphviz \
+        git \
         supervisor \
         libpng12-dev \
         libbz2-dev \
