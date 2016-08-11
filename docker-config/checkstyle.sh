@@ -14,7 +14,7 @@ pdepend --summary-xml=/results/pdepend/result.html ${DRONE_DIR}/${SRC_DIR}
 
 phploc --version
 mkdir /results/phploc
-phploc --log-csv /results/phploc/log.csv --progress --git-repository . ${DRONE_DIR}/${SRC_DIR}
+phploc ${DRONE_DIR}/${SRC_DIR} > /results/phploc/result.txt
 
 tar -zcvf results.tar.gz /results
 mv results.tar.gz /results
